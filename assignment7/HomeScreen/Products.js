@@ -1,11 +1,12 @@
 import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 import { useCart } from "../CartContext";
 
 const products = [
     {id: '1', image: require('../assets/dress1.png'), name: 'Office Wear', description: 'reversible angora cardigan', price: '$120', remove: require('../assets/remove.png')},
     {id: '2', image: require('../assets/dress2.png'), name: 'Black', description: 'reversible angora cardigan', price: '$120', remove: require('../assets/remove.png')},
     {id: '3', image: require('../assets/dress3.png'), name: 'Church Wear', description: 'reversible angora cardigan', price: '$120', remove: require('../assets/remove.png')},
-    {id: '4', image: require('../assets/dress4.png'), name: 'Lamerei', description: 'reversible angora cardigan', price: '$120', remove: require('../assets/remove.png')},
+    {id: '4', image: require('../assets/dress4.png'), name: 'Lamerei', description: 'Recycle Boucle Knit Cardigan Pink', price: '$120', remove: require('../assets/remove.png')},
     {id: '5', image: require('../assets/dress5.png'), name: '21WN', description: 'reversible angora cardigan', price: '$120', remove: require('../assets/remove.png')},
     {id: '6', image: require('../assets/dress6.png'), name: 'Lopo', description: 'reversible angora cardigan', price: '$120', remove: require('../assets/remove.png')},
     {id: '7', image: require('../assets/dress7.png'), name: '21WN', description: 'reversible angora cardigan', price: '$120', remove: require('../assets/remove.png')},
@@ -13,13 +14,17 @@ const products = [
 ];
 
 function ProductCard({product}){
+  const navigation = useNavigation();
     const {dispatch} = useCart()
 
     const addToCart = () => {
         dispatch({type: 'ADD_TO_CART', payload: product})
-    }
+    };
+    const navigateToDetail = () => {
+      navigation.navigate('ProductDetails', { product });
+    };
     return (
-        <View style={styles.card}>
+      <TouchableOpacity onPress={navigateToDetail} style={styles.card}>
             <Image source={product.image} style={styles.image} />
             <Text style={styles.name}>{product.name}</Text>
             <Text style={styles.description}>{product.description}</Text>
@@ -27,7 +32,7 @@ function ProductCard({product}){
             <TouchableOpacity style={styles.addProduct} onPress={addToCart}>
                 <Image style={styles.addButton} source={require('../assets/add_circle.png')}></Image>
             </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
         
     )
 }

@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import 'react-native-gesture-handler';
 import HomeScreen from './HomeScreen/HomeScreen';
 import CartScreen from './CartScreen/CartScreen';
+import ProductDetails from './ProductDetailScreen/ProductDetails';
 import { CartProvider } from './CartContext';
 
 
@@ -16,6 +17,7 @@ export default function App() {
         <Stack.Navigator initialRouteName='Home' screenOptions={{headerShown: false}}>
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Cart" component={CartScreen} />
+          <Stack.Screen name="ProductDetails" component={ProductDetails} />
         </Stack.Navigator>
       </NavigationContainer>
     </CartProvider>

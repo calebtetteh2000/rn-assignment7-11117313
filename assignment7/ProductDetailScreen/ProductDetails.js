@@ -4,12 +4,13 @@ import Header from "./Header";
 import ProductInfo from "./ProductInfo";
 import Footer from "./Footer";
 
-function ProductDetails({navigation}){
+function ProductDetails({navigation, route}){
     return(
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scroll}>
                 <Header navigation={navigation}/>
-                <ProductInfo />
+                <ProductInfo route={route}/>
+                <Footer navigation={navigation}/>
             </ScrollView>
         </View>
     )
