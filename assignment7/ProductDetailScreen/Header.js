@@ -6,6 +6,56 @@ export default function Header(){
     const navigation = useNavigation();
 
     return(
-        <View style={styles.container}></View>
+        <View style={styles.container}>
+            <View>
+                <TouchableOpacity onPress={toggleMenu}>
+                    <Image style={styles.menu} source={require('../assets/Menu.png')} />
+                </TouchableOpacity>
+            </View>
+            <View>
+                <Image style={styles.logo} source={require('../assets/Logo.png')} />
+            </View>
+            <View style={styles.iconsContainer}>
+                <Image style={styles.search} source={require('../assets/Search.png')} />
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Cart')}>
+                    <Image style={styles.shoppingBag} source={require('../assets/shoppingBag.png')} />
+                </TouchableOpacity>
+            </View>
+        </View>
     )
 }
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 20,
+        paddingTop: 60,
+        paddingBottom: 10,
+        width: '100%',
+        position: 'relative',
+        backgroundColor: 'white',
+    },
+    menu: {
+        width: 30,
+        height: 33,
+    },
+    logo: {
+        width: 99,
+        height: 40,
+        left: 21,
+    },
+    iconsContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    search: {
+        width: 30,
+        height: 30,
+        marginRight: 20,
+    },
+    shoppingBag: {
+        width: 30,
+        height: 30,
+    },
+})
