@@ -5,12 +5,17 @@ const CartList = ({item}) => {
     const {dispatch} = useCart()
 
     const removeFromCart = () => {
+    if(item && item.id){
         dispatch({type: 'REMOVE_FROM_CART', payload: item.id})
+        }
+    };
+    if(!item){
+        return null;
     }
 
     return(
     <View style={styles.cartList}>
-        <Image source={item.image} style={styles.productImage} />
+        <Image source={{uri: item.image.uri}} style={styles.productImage} />
         <View style={styles.productDetails}>
             <Text style={styles.name}>{item.name}</Text>
             <Text style={styles.description}>{item.description}</Text>
@@ -18,7 +23,7 @@ const CartList = ({item}) => {
         </View>
         <View>
             <TouchableOpacity style={styles.removeButton} onPress={removeFromCart}>
-                <Image source={item.remove} style={styles.removeImage} />
+                <Image source={require('../assets/remove.png')} style={styles.removeImage} />
             </TouchableOpacity>
         </View>
     </View>
@@ -27,14 +32,19 @@ const CartList = ({item}) => {
 
 export default function Checkout(){
     const {cart} = useCart();
+    if (!cart) {
+        return null;
+      }
     
     return(
-        <View style={styles.container}>
-            {cart.map(item => (
-                <CartList key={item.id} item={item}></CartList>
-            ))}
-            
-        </View>
+    <View style={styles.container}>
+        {cart.map(item => {
+            if (item && item.id) {
+                return <CartList key={item.id} item={item}></CartList>;
+            }
+            return null;
+        })}
+    </View>
     )
 }
 

@@ -41,7 +41,9 @@ export default function Header() {
                 </TouchableOpacity>
                 <Text style={styles.menuNameText}>CALEB TETTEH</Text>
                 <View style={styles.line} />
-                <Text style={styles.menuText}>Store</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                    <Text style={styles.menuText}>Store</Text>
+                </TouchableOpacity>
                 <Text style={styles.menuText}>Locations</Text>
                 <Text style={styles.menuText}>Blog</Text>
                 <Text style={styles.menuText}>Jewelry</Text>

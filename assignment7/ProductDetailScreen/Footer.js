@@ -1,10 +1,24 @@
 import { StyleSheet, View, Text, Image } from "react-native";
+import { useCart } from "../CartContext";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function Footer(){
+export default function Footer({product}){
+    const {dispatch} = useCart();
+
+    const addToCart = () => {
+        if (product && product.id) {
+            dispatch({ type: 'ADD_TO_CART', payload: product });
+        }
+    };
+    // if (!product) {
+    //     return null;
+    // }
     return(
         <View style={styles.footer}>
             <Image style={styles.plus} source={require('../assets/Plus.png')}></Image>
+            <TouchableOpacity onPress={addToCart}>
             <Text style={styles.buttonText}>ADD TO BASKET</Text>
+            </TouchableOpacity>
             <Image style={styles.wishlist} source={require('../assets/Heart.png')}></Image>
         </View>
     )

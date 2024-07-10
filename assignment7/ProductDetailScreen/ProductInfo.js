@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   shareImage:{
     left: 335,
-    top: -170,
+    top: -55,
   },
   bleach:{
     top: 60,
