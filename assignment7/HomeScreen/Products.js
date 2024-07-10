@@ -1,6 +1,19 @@
 import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { useCart } from "../CartContext";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
+
+const fetchProducts = async () => {
+  try{
+    const response = await axios.get('https://fakestoreapi.com/products');
+    const products = response.data;
+    return products;
+    } catch (error) {
+      console.error(error);
+  }
+};
 
 const products = [
     {id: '1', image: require('../assets/dress1.png'), name: 'Office Wear', description: 'reversible angora cardigan', price: '$120', remove: require('../assets/remove.png')},
@@ -15,36 +28,53 @@ const products = [
 
 function ProductCard({product}){
   const navigation = useNavigation();
-    const {dispatch} = useCart()
+  const {dispatch} = useCart();
 
-    const addToCart = () => {
-        dispatch({type: 'ADD_TO_CART', payload: product})
-    };
-    const navigateToDetail = () => {
-      navigation.navigate('ProductDetails', { product });
-    };
-    return (
-      <TouchableOpacity onPress={navigateToDetail} style={styles.card}>
-            <Image source={product.image} style={styles.image} />
-            <Text style={styles.name}>{product.name}</Text>
-            <Text style={styles.description}>{product.description}</Text>
-            <Text style={styles.price}>{product.price}</Text>
-            <TouchableOpacity style={styles.addProduct} onPress={addToCart}>
-                <Image style={styles.addButton} source={require('../assets/add_circle.png')}></Image>
-            </TouchableOpacity>
-        </TouchableOpacity>
-        
-    )
+  const addToCart = () => {
+    dispatch({type: 'ADD_TO_CART', payload: product})
+};
+const navigateToDetail = () => {
+  navigation.navigate('ProductDetails', { product });
+};
+
+  return(
+    <TouchableOpacity onPress={navigateToDetail} style={styles.card}>
+      <Image source={{uri: product.image}} style={styles.image} />
+      <Text style={styles.name}>{product.title}</Text>
+      <Text style={styles.description}>{product.description}</Text>
+      <Text style={styles.price}>{product.price}</Text>
+      <TouchableOpacity style={styles.addProduct} onPress={() => addToCart(product)}>
+      <Image style={styles.addButton} source={require('../assets/add_circle.png')}></Image>
+      </TouchableOpacity>
+    </TouchableOpacity>
+  );
 }
+    // return (
+    //   <TouchableOpacity onPress={navigateToDetail} style={styles.card}>
+    //         <Image source={product.image} style={styles.image} />
+    //         <Text style={styles.name}>{product.name}</Text>
+    //         <Text style={styles.description}>{product.description}</Text>
+    //         <Text style={styles.price}>{product.price}</Text>
+    //         <TouchableOpacity style={styles.addProduct} onPress={addToCart}>
+    //             <Image style={styles.addButton} source={require('../assets/add_circle.png')}></Image>
+    //         </TouchableOpacity>
+    //     </TouchableOpacity>
+        
+    // )
 
 export default function Products() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetchProducts().then((products) => setProducts(products));
+  }, []);
     return(
         <View style={styles.container}>
             {products.map(product => (
                 <ProductCard key={product.id} product={product}></ProductCard>
             ))}
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({

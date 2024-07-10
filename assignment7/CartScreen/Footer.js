@@ -4,7 +4,12 @@ import { useCart } from "../CartContext";
 export default function Footer(){
     const {cart} = useCart();
 
-    const totalAmount = cart.reduce((sum, item) => sum + parseFloat(item.price.replace('$', '')), 0)
+    const totalAmount = cart.reduce((sum, item) => {
+        if (item.price && typeof item.price === 'string'){
+            return sum + parseFloat(item.price.replace('$', ''));
+        }
+        return sum; 
+    }, 0);
     return(
         <View style={styles.footer}>
             <View style={styles.checkoutButton}>
