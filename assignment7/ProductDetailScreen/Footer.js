@@ -15,10 +15,10 @@ export default function Footer({product}){
     // }
     return(
         <View style={styles.footer}>
-            <Image style={styles.plus} source={require('../assets/Plus.png')}></Image>
             <TouchableOpacity onPress={addToCart}>
-                <Text style={styles.buttonText}>ADD TO BASKET</Text>
+                <Image style={styles.plus} source={require('../assets/Plus.png')}></Image>
             </TouchableOpacity>
+                <Text style={styles.buttonText}>ADD TO BASKET</Text>
             <Image style={styles.wishlist} source={require('../assets/Heart.png')}></Image>
         </View>
     )
