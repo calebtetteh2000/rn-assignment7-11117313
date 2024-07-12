@@ -48,7 +48,7 @@ const navigateToDetail = () => {
     <TouchableOpacity onPress={navigateToDetail} style={styles.card}>
       <Image source={product.image} style={styles.image} />
       <Text style={styles.name}>{product.title}</Text>
-      <Text style={styles.description}>{product.description}</Text>
+      <Text style={styles.description} numberOfLines={2} ellipsizeMode="tail">{product.description}</Text>
       <Text style={styles.price}>{product.price}</Text>
       <TouchableOpacity style={styles.addProduct} onPress={() => addToCart(product)}>
       <Image style={styles.addButton} source={require('../assets/add_circle.png')}></Image>
