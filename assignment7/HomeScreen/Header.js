@@ -121,19 +121,22 @@ const styles = StyleSheet.create({
         height: 30,
     },
     menuNameText:{
-        fontSize: 20,
-        marginVertical: 10,
-        letterSpacing: 3
+        fontSize: 24,
+        top: 12,
+        fontWeight: '300',
+        letterSpacing: 2,
     },
     menuText: {
-        fontSize: 18,
-        marginVertical: 10,
+        fontSize: 24,
+        marginVertical: 20,
+        top: 20,
+        fontWeight: '300',
     },
     line:{
         height: 1, 
         width: 120, 
         backgroundColor: '#D18035', 
-        marginVertical: 5,
+        marginVertical: 15,
         left: 25
     }
 });
